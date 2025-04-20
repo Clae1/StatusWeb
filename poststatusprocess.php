@@ -97,9 +97,9 @@
                         if (!preg_match($pattern, $st))
                         {
                             echo "<p>Status is in the wrong format!!!</p>";
-                            echo "<p>The status must contain alphanumericals, comma, period, exclamation and question mark</p>";
+                            echo "<p>The status must contain only alphanumericals, comma, period, exclamation and question mark</p>";
                             echo "<p><a href=\"index.html\">Return to Home Page</a></p>";
-                            echo "<p><a href=\"poststatusform.php\">Return to Post Statu page</a></p>";
+                            echo "<p><a href=\"poststatusform.php\">Return to Post Status page</a></p>";
                             die();
                         }
 
