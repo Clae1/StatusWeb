@@ -28,19 +28,19 @@
 
                 else 
                 {
-                    //Check if the database exist 
+                    //Check if the Main database exist 
                     $query = "SELECT * FROM statusPost";
                     $result = mysqli_query($conn, $query); 
 
-                    //Create the database 
+                    //Create the Main database 
                     if(!$result)
                     {
                         $query1 = "CREATE TABLE `statusPost` (
                             `stcode` VARCHAR(5) NOT NULL,
-                            `st` VARCHAR(200) NOT NULL,
+                            `st` VARCHAR(500) NOT NULL,
                             `share` VARCHAR(50),
                             `date` DATE NOT NULL,
-                            `perm` VARCHAR(100),
+                            `perm` VARCHAR(200),
                             PRIMARY KEY(`stcode`)
                         );";
                         $result = mysqli_query($conn, $query1); 
@@ -52,7 +52,7 @@
                             echo "<p>MySQL Error: ", mysqli_error($conn), "</p>";
                         }  
                     }
-
+                    
                     else 
                     {
                         //Get data from the form 
@@ -68,9 +68,11 @@
 
                         //First field
                         $stcode = $_POST["stcode"];
-                        echo "<p>$stcode</p>";
                         $pattern = "/^S\d{4}$/";
 
+                        //debugging 
+                        // echo "<p>$stcode</p>";
+                       
                         //Check if the field is formatted correctly 
                         if (!preg_match($pattern, $stcode))
                         {
@@ -80,13 +82,16 @@
 
                             echo "<p><a href=\"index.html\">Return to Home Page</a></p>";
                             echo "<p><a href=\"poststatusform.php\">Return to Post Statu page</a></p>";
+                            die();
                         }
 
 
                         //Second Field
                         $st = $_POST["st"];
-                        echo "<p>$st</p>";
                         $pattern = "/^[a-zA-Z0-9,.?! ]+$/";
+
+                        //debugging
+                        // echo "<p>$st</p>";
 
                         //Check if the field is formatted correctly 
                         if (!preg_match($pattern, $st))
@@ -95,36 +100,77 @@
                             echo "<p>The status must contain alphanumericals, comma, period, exclamation and question mark</p>";
                             echo "<p><a href=\"index.html\">Return to Home Page</a></p>";
                             echo "<p><a href=\"poststatusform.php\">Return to Post Statu page</a></p>";
+                            die();
                         }
 
 
                         //Third Field
+                        //Check if "share_post" is set or is not null 
                         if(isset($_POST["share_post"]))
                         {
                             $share = $_POST["share_post"];
-                            echo "<p>$share</p>";
+
+                            //debugging
+                            // echo "<p>$share</p>";
                         }
                         
 
                         //Fourth Field 
                         $date = $_POST["date"];
-                        echo "<p>$date</p>";
-                    
-                        //Fifth Field
-                        if(isset($_POST["permission"]))
+
+                        //Separate the "date" string to differnt variables 
+                        $date_check = explode("-", $date);
+                        $year = $date_check[0];
+                        $month = $date_check[1];
+                        $day = $date_check[2];
+
+                        //Check if the date is in the correct format 
+                        if (!checkdate($month, $day, $year))
                         {
-                            $perm = $_POST["permission"];
-                            echo "<p>$perm[0]</p>";
-                            echo "<p>$perm[1]</p>";
-                            echo "<p>$perm[2]</p>";
-                            echo "it worked";
+                            //Error message if function is false
+                            echo "<p>Date is in the incorrect format!!! <br> Please Check your inputted date</p>";
+                            die();
                         }
+
+                        //debugging 
+                        // echo "<p>$date</p>";
+
+
+                        //Fifth Field (Comprised of different fields)
+                        if(isset($_POST["like"]) || isset( $_POST["comment"]) || isset( $_POST["share"]))
+                        {
+                            $perm1 = $_POST["like"];
+                            $perm2 = $_POST["comment"];
+                            $perm3 = $_POST["share"];
+                            $perm = $perm1." ".$perm2." ".$perm3;
+
+                            //debugging 
+                            // echo "<p>$perm1</p>";
+                            // echo "<p>$perm2</p>";
+                            // echo "<p>$perm3</p>";
+                            // echo "<p>$perm</p>";
+                        }
+
+
+                        // Set up the SQL command to add the data into the table
+                        $query = "INSERT INTO statusPost (stcode, st, share, date, perm) VALUES ('$stcode', '$st','$share', '$date', '$perm')";
+
+                        // executes the query
+                        $result = mysqli_query($conn, $query);
+
+                        // checks if the execution was successful
+                        if(!$result) 
+                        {
+                            echo "<p>Something is wrong with ",	$query, "</p>";
+                            echo "<p>MySQL Error: ", mysqli_error($conn), "</p>";
+                        } 
+  
                         else
                         {
-                            echo "error";
+                            echo "<h1>!!!Your Post has been successfully been processed!!!</h1>";
+                            echo "<p><a href=\"index.html\">Return to Home Page</a></p>";
                         }
                         
-                        echo "</table>";
                         // Frees up the memory, after using the result pointer
                         mysqli_free_result($result);
                     } 
