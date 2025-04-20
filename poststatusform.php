@@ -37,13 +37,13 @@
         <p>	
             <label for="permision"> Permission: </label>
 
-			<input type="checkbox" name="permission[]" id="like" value="Like"/>
+			<input type="checkbox" name="like" id="like" value="Like"/>
             <label for="like"> Allow Like</label>
 
-            <input type="checkbox" name="permission[]" id="comment" value="Comment"/>
+            <input type="checkbox" name="comment" id="comment" value="Comment"/>
             <label for="comment"> Allow Comments</label>
 
-            <input type="checkbox" name="permission[]" id="allowshare" value="Share"/>
+            <input type="checkbox" name="share" id="allowshare" value="Share"/>
             <label for="allowshare"> Allow Share</label>
         </p>
 
