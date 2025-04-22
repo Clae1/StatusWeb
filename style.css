@@ -149,3 +149,55 @@ input[type=submit]:hover {
     color: #ccc;
 }
 
+/*css for poststatusprocess.php*/
+.error_message
+{
+    text-align: center;
+    background-color: lightcoral;
+    background-position: center;
+    box-shadow: rgba(0,0,0,1) 0 1px 0;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 300px;
+    margin-right: 300px;
+    display: block;
+}
+
+/*div class content*/
+.content {
+    background-color: white;
+    background-position: center;
+    border-style: dotted;
+    margin: 200px;
+}
+
+/*Css for search html*/
+.search_html {
+    margin: 40px;
+}
+
+.postsearch_container {
+    background-color: white;
+    background-position: center;
+    border-style: dotted;
+    margin: 50px;
+}
+
+/*Css for about html*/
+.about_container {
+    background-color: white;
+    background-position: center;
+    border-style: dotted;
+    margin: 50px;
+}
+
+/*Css for about resetdb*/
+.reset_container {
+    background-color: white;
+    background-position: center;
+    border-style: dotted;
+    margin: 50px;
+}
+
+
+
