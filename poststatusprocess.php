@@ -161,13 +161,13 @@
                         // checks if the execution was successful
                         if(!$result) 
                         {
-                            echo "<p>Something is wrong with ",	$query, "</p>";
-                            echo "<p>MySQL Error: ", mysqli_error($conn), "</p>";
+                            echo "<p>Something is wrong with Status Code!!!</p>";
+                            echo "<p>Sorry this Status code already exist. Please enter a unique code!!!</p>";
                         } 
   
                         else
                         {
-                            echo "<h1>!!!Your Post has been successfully been processed!!!</h1>";
+                            echo "<h1>!!!Your Status has been successfully been posted !!!</h1>";
                             echo "<p><a href=\"index.html\">Return to Home Page</a></p>";
                         }
                         
