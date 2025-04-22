@@ -1,24 +1,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" >
     <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Week 05 - MySQL Databases with PHP</title>
-    <link rel="stylesheet" href="php_styles.css" type="text/css" /> 
+        <title>Home Page</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="style.css" type="text/css" /> 
     </head>
-    <body>
+
+    <body class="index">
         <h1>Status Posting System</h1>
-        <p>Name: Claeone Villareal <br/>
-            Student Username: fbz9133  <br/>
-            Email: fbz9133@autuni.ac.nz
-        </p>
 
-        <p>I declare that this assignment is my individual work. I have not worked
-            collaboratively, nor have I copied from any other student's work or from 
-            any other source</p>
-
-
-        <p><a href="poststatusform.php">Post a new status</a></p>
-        <p><a href="searchstatusform.html">Search Status</a></p>
-        <p><a href="about.html">About the assignment</a></p>
+        <div class="name">
+            <p>Name: Claeone Villareal <br/>
+                Student Username: fbz9133  <br/>
+                Email: fbz9133@autuni.ac.nz
+            </p>
+        </div>
+        
+        <div class="mywork">
+            <p>I declare that this assignment is my individual work. I have not worked
+                collaboratively, nor have I copied from any other student's work or from 
+                any other source</p>
+        </div>
+        
+        <div class="button_group">
+            <table>
+                <tr>
+                    <td>
+                        <p><a href="poststatusform.php" class="button">Post a new status</a></p>
+                    </td>
+                    <td>
+                        <p><a href="searchstatusform.html" class="button">Search Status</a></p>
+                    </td>
+                    <td>
+                        <p><a href="about.html" class="button">About the assignment</a></p>
+                    </td>
+                    
+                </tr> 
+            </table>
+        </div>
         
     </body>
 </html>
