@@ -1,11 +1,14 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" >
     <head>
         <title>Status Posting System</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="style.css" type="text/css" />
     </head>
 
     <body>
-        <h1>Status information</h1>
         <div class="content">
+        <h1>Status information</h1>
             <?php   
                 // sql info or use include 'file.inc'
                 require_once('../../files/setting.php');
@@ -35,9 +38,14 @@
                     //Create the Main database 
                     if(!$result)
                     {
-                        echo "<p>No status found in the system. Please go to the post status page to post one.</p>";
-                        echo "<p><a href=\"index.html\">Return to Home Page</a></p>";
-                        echo "<p><a href=\"poststatusform.php\">Return to Post Statu page</a></p>";
+                        echo "<p class=\"error_message\">No status found in the system. Please go to the post status page to post one.</p>";
+
+                        echo "<table class=\"button_group\">";
+                        echo "<tr>";
+                        echo "<td><p><a href=\"index.html\">Return to Home Page</a></p></td>";
+                        echo "<td><p><a href=\"poststatusform.php\" class=\"button\">Return to Post Status page</a></p></td>";
+                        echo "</tr>";
+                        echo "</table>";
                         die;
                     }
                     
@@ -51,25 +59,35 @@
                         if (preg_match($pattern, $search))
                         {
                             //error message
-                            echo "<p><a href=\"index.html\">Return to Home Page</a></p>";
-                            echo "<p><a href=\"searchstatusform.html\">Return to Search status page</a></p>";
-                            die("<p>Search box is blank, Please enter a keyword into search box!!!</p>");
+                            echo "<p class=\"error_message\">Search box is blank, Please enter a keyword into search box!!!</p>";
+                            echo "<table class=\"button_group\">";
+                            echo "<tr>";
+                            echo "<td><p><a href=\"index.html\" class=\"button\">Return to Home Page</a></p></td>";
+                            echo "<td><p><a href=\"searchstatusform.html\" class=\"button\">Return to Search status page</a></p></td>";
+                            echo "</tr>";
+                            echo "</table>";
+                            die();
                         }
 
                         //check if the field has correct formatting 
                         if (!preg_match($pattern2, $search))
                         {
                             //error message
-                            echo "<p><a href=\"index.html\">Return to Home Page</a></p>";
-                            echo "<p><a href=\"searchstatusform.html\">Return to Search status page</a></p>";
-                            die("<p>The status must contain only alphanumericals, comma, period, exclamation and question mark</p>");
+                            echo "<p class=\"error_message\">The status must contain only alphanumericals, comma, period, exclamation and question mark</p>";
+                            echo "<table class=\"button_group\">";
+                            echo "<tr>";
+                            echo "<td><p><a href=\"index.html\" class=\"button\">Return to Home Page</a></p></td>";
+                            echo "<td><p><a href=\"searchstatusform.html\" class=\"button\">Return to Search status page</a></p></td>";
+                            echo "</tr>";
+                            echo "</table>";
+                            die();
                         }
 
                         //Check if keyword is present in the st columns 
                         $query = "SELECT * FROM statusPost WHERE st LIKE '$search%'";
                         $result = mysqli_query($conn, $query);
 
-                        if(!$result)
+                        if(mysqli_num_rows($result) == 0)
                         {
                             echo "<p>Status not found. Please use a different Keyword!!!</p>";
                             echo "<p><a href=\"searchstatusform.html\">Return to Search status page</a></p>";
@@ -91,8 +109,12 @@
                                 ."<hr>";
                                 
                             }
-                            echo "<p><a href=\"searchstatusform.html\">Search for another post</a></p>";
-                            echo "<p><a href=\"index.html\">Return to Home Page</a></p>";
+                            echo "<table class=\"button_group\">";
+                            echo "<tr>";
+                            echo "<td><p><a href=\"index.html\" class=\"button\">Return to Home Page</a></p></td>";
+                            echo "<td><p><a href=\"searchstatusform.html\" class=\"button\">Return to Search status page</a></p></td>";
+                            echo "</tr>";
+                            echo "</table>";
                         }
                         
                         // Frees up the memory, after using the result pointer
