@@ -1,0 +1,18 @@
+$query = "SELECT * FROM statusPost";
+
+$query1 = "CREATE TABLE `statusPost` (
+                                `stcode` VARCHAR(5) NOT NULL,
+                                `st` VARCHAR(500) NOT NULL,
+                                `share` VARCHAR(50),
+                                `date` DATE NOT NULL,
+                                `perm` VARCHAR(200),
+                                PRIMARY KEY(`stcode`)
+                            );";
+
+$query = "INSERT INTO statusPost (stcode, st, share, date, perm) VALUES ('$stcode', '$st','$share', '$date', '$perm')";
+
+$query = "DROP TABLE statusPost";
+
+$query = "SELECT * FROM statusPost";
+
+$query = "SELECT * FROM statusPost WHERE st LIKE '$search%'";

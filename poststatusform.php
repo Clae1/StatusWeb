@@ -5,6 +5,8 @@
     <title>Status Posting System</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="style.css" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body class="postform_container">
@@ -31,7 +33,7 @@
 
             else 
             {
-                //Check if the Main database exist 
+                //Check if the Main database exist using the query 
                 $query = "SELECT * FROM statusPost";
                 $result = mysqli_query($conn, $query);
 
@@ -69,7 +71,7 @@
                 <tr>
                     <td class="post_info"><label for="st"> Status: </label></td>
                     <td>
-                        <input type="text" name="st" id="st" placeholder="Enter status here..." />
+                        <input type="text" name="st" class="st" placeholder="Enter status here..." />
                     </td>
                 </tr>
 

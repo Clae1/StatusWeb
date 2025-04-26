@@ -35,7 +35,7 @@
                     $query = "SELECT * FROM statusPost";
                     $result = mysqli_query($conn, $query); 
 
-                    //Create the Main database 
+                    //If there is an error with the query result. Print an error message that no status or information exist on the table 
                     if(!$result)
                     {
                         echo "<p class=\"error_message\">No status found in the system. Please go to the post status page to post one.</p>";
@@ -51,7 +51,7 @@
                     
                     else 
                     {
-                        $search = $_POST["search"];
+                        $search = mysqli_real_escape_string($conn, $_GET["search"]);
                         $pattern = "/^$/";
                         $pattern2 = "/^[a-zA-Z0-9,.?! ]+$/";
 
@@ -99,13 +99,18 @@
                             //check that record has been retrieved from the table 
                             while ($row = mysqli_fetch_assoc($result))
                             {
-                                echo "<p>Status code:",$row["stcode"]."<br> Status: ",$row["st"],"</p>"
-                                ."<p>Share: ",$row["share"]
+                                echo "<div class=\"search_info\">"
+                                ."<p>Status code:",$row["stcode"]
+                                ."<br>"
+                                ."Status: ",$row["st"]
+                                ."<br>" 
+                                ."Share: ",$row["share"]
                                 ."<br>"
                                 ."Date Posted: ",$row["date"]
                                 ."<br>"
                                 ."Permission: ",$row["perm"]
                                 ."</p>"
+                                ."</div>"
                                 ."<hr>";
                                 
                             }
