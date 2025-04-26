@@ -3,11 +3,15 @@ html {
     background-color: #001840;
 }
 
+h1, h2, h3, p, li {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 h1 {
     text-align: center;
 }
 
-p {
+p, li {
     font-size: 20px;
 }
 
@@ -56,6 +60,7 @@ p {
 .index {
     background-color: white;
     background-position: center;
+    border: 4px dotted #d8291c;
     margin: 50px;
 }
 
@@ -77,6 +82,7 @@ p {
 .postform_container {
     background-color: white;
     background-position: center;
+    border: 4px dotted #d8291c;
     margin: 50px;
 }
 
@@ -118,6 +124,7 @@ input[type=text] {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    word-wrap: break-word;
 }
 
 input[type=date] {
@@ -179,15 +186,20 @@ input[type=submit]:hover {
 .postsearch_container {
     background-color: white;
     background-position: center;
-    border-style: dotted;
+    border: 4px dotted #d8291c;
     margin: 50px;
+}
+
+.search_info {
+    background-color: lightgray;
+    margin: 20px;
 }
 
 /*Css for about html*/
 .about_container {
     background-color: white;
     background-position: center;
-    border-style: dotted;
+    border: 4px dotted #d8291c;
     margin: 50px;
 }
 
@@ -195,8 +207,33 @@ input[type=submit]:hover {
 .reset_container {
     background-color: white;
     background-position: center;
-    border-style: dotted;
+    border: 4px dotted #d8291c;
     margin: 50px;
+}
+
+/*Css for about.html*/
+.question {
+    background-color: lightgray;
+    margin: 10px;
+    padding-bottom: 5px;
+}
+
+.h3 {
+    margin: 20px;
+}
+
+.paragraph {
+    margin-left: 5px;
+    margin-right: 15px;
+    text-align: justify;
+    text-align-last: left;
+}
+
+.about_list {
+    margin-left: 4px;
+    margin-right: 4px;
+    text-align: justify;
+    text-align-last: left;
 }
 
 

@@ -32,7 +32,7 @@
                 else 
                 {
                     //Dropping the Main table
-                    $query = "DROP TABLE statusPost";
+                    $query = mysqli_real_escape_string($conn,"DROP TABLE statusPost");
                     $result = mysqli_query($conn, $query); 
 
                     //error message 
@@ -51,7 +51,7 @@
                 }
             ?>
             <h1>Table has been deleted successfully!!!</h1>
-            <h2><a href=index.html class="button">Return to Home page</a></h2>
+            <h2 class="post_home"><a href=index.html class="button">Return to Home page</a></h2>
         </div>
     </body>
 </html>

@@ -4,23 +4,158 @@
         <title>About Page</title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="style.css" type="text/css" /> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
         <div class="about_container">
             <h1>About Page</h1>
-            <h2>What special features have you done or attempted in creating the website?</h2>
-            <h2>Which part(s) did you have trouble with?</h2>
-            <h2>What would you like to do better next time?</h2>
-            <h2>What you have learnt along the way? Did you use any references or resources during this
-                project? If so, please include the sources</h2>
-        
-        
+
+            <div class="question">
+                <h2>What special features have you done or attempted in creating the website?</h2>
+                <ul class="about_list">
+                    <li>
+                        <p class="paragraph">
+                            A special feature in creating the website was the detailed buttons. I used a website called "https://css-tricks.com/examples/ButtonMaker/#"
+                            to help me create buttons that are more appealing and responsive. When a user hovers over the button it reacts and changes color making it 
+                            easy for users to know if a button is clickable or not. 
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <h2>Which part(s) did you have trouble with?</h2>
+                <ul class="about_list">
+                    <li>
+                        <p class="paragraph"> 
+                            Had trouble with creating error messages for the "poststatusprocess.php", creating a regular expression
+                            for the Status code was a bit hard at first as despite what metacharacters and sequences are used the 
+                            specific inputs were still allowed. After some research, I needed to add "^" and "$" in the syntax to ensure
+                            that reg_match() function reads the syntax or pattern from beginning to end.   
+                        </p>
+                    </li>
+                    <li>
+                        <p class="paragraph"> 
+                            The style or CSS of the website was a bit difficult to manage at times. I wanted the design of the website 
+                            to be simple and clean so that the user knows what information they are looking at and what they are able to
+                            click. I had trouble figuring out what html tags needed a specific class and what CSS code is needed to achieve 
+                            the design that I was looking for as the CSS file of the website did not update immediately. 
+                        </p>
+                    </li>
+                    <li>
+                        <p class="paragraph"> 
+                            Another thing I had trouble with was when the database was reset. If one were 
+                            to create a status post and submit it, the same error message would occur regardless of what other errors were 
+                            present in the field. The issue was that my PHP code will both create and submit the information to the table Which
+                            is not possilbe as the table does not exist when submitting. I had to move query, that created the table, to 
+                            "poststatusform.php" so that when a user enters the page it will check if the table exist or not. 
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <h2>What would you like to do better next time?</h2>
+                <ul class="about_list">
+                    <li>
+                        <p class="paragraph">
+                            Next time I would to like the database to have tables with one to many relationship, currently the website only uses a 
+                            Primary table and nothing more. Based on the assignment users can choose many permissions, in terms of 
+                            relational tables, we can make a child table for the permissions using the Status code primary key as the foriegn key 
+                            creating a one to many relationship. If we to update the status form, we can search a post based on the permissions. 
+                        </p>
+                    </li>
+                    <li>
+                        <p class="paragraph">
+                            Next time I would like to use more Bootstrap features. Currently, the website is mostly designed with Basic CSS code, 
+                            and due to this the containers and layout of the website is not too responsive to window size changes. Using Bootstrap I could 
+                            also design a more appealing design for the website by using the grid systems. 
+                        </p>
+                    </li>
+                    <li>
+                        <p class="paragraph">
+                            Another improvement I would like to make for the next website is create a better designed layout. The current design
+                            of the website is simple, which is good, but not too appealing. I can add a navigation bar, side bars or more
+                            functionalities to make the website less generic. 
+                        </p>
+                    </li>
+                    <li>
+                        <p class="paragraph">
+                            Next time I hope to learn how to implement images using the web server. I tried attempting to implement images to the website, but despite
+                            what paths were put into the url or src, the web browswer was unable to locate the image files. 
+                        </p>
+                    </li>
+                    <li>
+                        <p class="paragraph">
+                            Lastly, for next time I would like to improve how the error messages are displayed. Currently, the error messages only appear 
+                            one at a time, thus each click of the submit may show a unique error messages which is not ideal for the user experience.
+                            Possibiliy using bootstrap, when there is an error with a text field it will the field will turn red and a pop-up window 
+                            will appear to indicate to user what needs to be updated or changed. 
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="question">
+                <h2>What you have learnt along the way? Did you use any references or resources during this
+                    project? If so, please include the sources</h2>
+                <ul class="about_list">
+                    <li>
+                        <p class="paragraph">
+                            One of the things I have learnt is how to extract information from the form, and use PHP code to do a varierty of task:
+                            <ul class="about_list">
+                                <li>Create error messages based on user input</li>
+                                <li>Add user information into a table or database</li>
+                                <li>Search for specific information from a table</li>
+                                <li>Display information based on the user input</li>
+                            </ul>
+                        </p>
+                    </li>
+                    <li>
+                        <p class="paragraph">
+                            Another thing I have learnt is how to use Regular expressions to help handle error messages using differnt types of fields,
+                            and search for specific information on a database. It has made it easier to handle errors within a textfield as I do not have
+                            to create complex IF statement conditions. 
+                        </p>
+                    </li>
+                    <li>
+                        <p class="paragraph">
+                            I have learnt how to style the webpage more through more complex CSS code. I used websites such as css3clickchart and 
+                            css tricks to help me implement the styles for ceratin features of the website. For example, the buttons are more 
+                            stylized and more appealing. 
+                        </p>
+                    </li>
+                    <li>
+                        <p class="paragraph">
+                            Lastly, I have learnt how to connect MyPHP to the Web server, and use query statments to create new data into the tables,
+                            delete tables, create data and search data within a table. This will help apply this knowledge towards future web 
+                            development projects. 
+                        </p>
+                    </li>
+                    <hr/>
+                    <li>
+                        <h3>References</h3>
+                        <p class="paragraph">
+                            <ul class="about_list">
+                                <li><a href="https://css3clickchart.com/?prop=box-shadow">CSS Click Chart</a></li>
+                                <li><a href="https://css-tricks.com/examples/ButtonMaker/#">CSS Button maker</a></li>
+                                <li><a href="https://www.w3schools.com/">W3Scchools</a></li>
+                                <li><a href="https://canvas.aut.ac.nz/courses/19455">Web Development PowerPoint Slides</a></li>
+                                <li><a href="https://developer.mozilla.org/en-US/">MDN Web DocS</a></li>
+                                <li><a href="https://www.php.net/">PHP.net</a></li>
+                                <li><a href="https://www.transparenttextures.com/">Transparent textures</a></li>
+                            </ul>
+                        </p>
+                    </li>
+                </ul>
+            </div>
             <form method="post" action="resetdb.php">
                 <p>
                     <input type="submit" value="Reset Datbase" />
                 </p>
             </form>
-            <p><a href="index.html" class="button">Return to Home Page</a></p>
+            <p class="post_home"><a href="index.html" class="button">Return to Home Page</a></p>
         </div>
     </body>
 </html>
