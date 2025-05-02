@@ -10,32 +10,30 @@
         <div class="reset_container">
             <h1>Reset Database</h1>
             <?php
-                // sql info or use include 'file.inc'
+                // Using require_once to check if the setting.php document has been included 
                 require_once('../../files/setting.php');
 
-                // The @ operator suppresses the display of any error messages
-                // mysqli_connect returns false if connection failed, otherwise a connection value
+                //Connecting to phpMyAdmin
                 $conn = mysqli_connect(
                     $host,
                     $user,
                     $pswd,
                     $dbnm
                 );
-                
+
                 // Checks if connection is successful
-                if (!$conn) 
-                {
-                    // Displays an error message
+                if (!$conn) {
+                    // Error message to indicate to user that the connection was not successful 
                     echo "<p>Database connection failure</p>";
                 } 
 
                 else 
                 {
-                    //Dropping the Main table
+                    //Delete the 'statusPost' table from the database using 'DROP TABLE'
                     $query = mysqli_real_escape_string($conn,"DROP TABLE statusPost");
                     $result = mysqli_query($conn, $query); 
 
-                    //error message 
+                    //This error message occurs if the user tries to delete a table that does not currently exist
                     if(!$result)
                     {
                         echo "<h2>There is no table in the database</h2>";
@@ -50,6 +48,8 @@
                     }
                 }
             ?>
+
+            <!-- Message of to confirm to user that the table has been deleted, and a button is used to direct the user to the home page -->
             <h1>Table has been deleted successfully!!!</h1>
             <h2 class="post_home"><a href=index.html class="button">Return to Home page</a></h2>
         </div>

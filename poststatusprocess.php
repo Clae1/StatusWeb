@@ -11,11 +11,10 @@
     <div class="content">
         <h1>Status Posting System</h1>
         <?php
-            // sql info or use include 'file.inc'
+            // Using require_once to check if the setting.php document has been included 
             require_once('../../files/setting.php');
 
-            // The @ operator suppresses the display of any error messages
-            // mysqli_connect returns false if connection failed, otherwise a connection value
+            //Connecting to phpMyAdmin
             $conn = mysqli_connect(
                 $host,
                 $user,
@@ -25,14 +24,16 @@
 
             // Checks if connection is successful
             if (!$conn) {
-                // Displays an error message
+                // Error message to indicate to user that the connection was not successful 
                 echo "<p>Database connection failure</p>";
             } 
             else 
             {
-                //Get data from the form 
-                //Check if status code, status or date are blank
+                //Pattern1 initialized with a regular expression which checks if the field is empty
                 $pattern1 = "/^$/";
+
+                //This IF statement is used to check if any of the fields are empty
+                //IF condition is true, an error message is displayed to indicate to the user that these fields cannot be blank 
                 if ( preg_match($pattern1, $_POST["stcode"]) || preg_match($pattern1,$_POST["st"]) || preg_match($pattern1, $_POST["date"])) {
                     echo "<p class=\"error_message\">Status Code, Status and Date must not be left blank!!!"
                         . "<br>"
@@ -47,11 +48,15 @@
                     die();
                 }
 
-                //First field
+                //First field status code 
                 $stcode = mysqli_real_escape_string($conn,$_POST["stcode"]);
+
+                //This regular expression is used to check if the status code field is in the correct format 
+                //It will check the user input whether their input has: Capital S followed by a number sequence with a length of 4 
                 $pattern2 = "/^S\d{4}$/";
             
-                //Check if the status code is formatted correctly and print an error message 
+                //Check if the status code is formatted correctly. If condition is false, print an error message that the  
+                //inputted text is in the Wrong format
                 if (!preg_match($pattern2, $stcode)) {
                     echo "<p class=\"error_message\">Status Code is in the wrong format!!! 
                                     <br> The Status code must start with a Uppercase letter 'S' followed by four digits
@@ -67,11 +72,15 @@
                 }
 
 
-                //Second Field
+                //Second Field status 
                 $st = mysqli_real_escape_string($conn, $_POST["st"]);
+
+                //Regular expression is used to restrict the users input to only alphanumericals, comma, period, exclamation and 
+                //question mark
                 $pattern3 = "/^[a-zA-Z0-9,.?! ]+$/";
             
-                //Check if the field is formatted correctly and print an error message 
+                //IF statement will check if the inputted text includes the correct format.
+                //If not, an error message is displayed to tell user that the status in the wrong format 
                 if (!preg_match($pattern3, $st)) {
                     echo "<p class=\"error_message\">Status is in the wrong format!!!"
                         . "<br>"
@@ -87,14 +96,13 @@
                 }
 
 
-                //Third Field
+                //Third Field share info 
                 //Check if "share_post" is set or is not null 
                 if (isset($_POST["share_post"])) {
                     $share = mysqli_real_escape_string($conn, $_POST["share_post"]);
                 }
 
-
-                //Fourth Field 
+                //Fourth Field date
                 $date = mysqli_real_escape_string($conn, $_POST["date"]);
 
                 //Separate the "date" string to differnt variables 
@@ -105,7 +113,6 @@
 
                 //Check if the date is in the correct format. If there is an error show an error message 
                 if (!checkdate($month, $day, $year)) {
-                    //Error message if function is false
                     echo "<p class=\"error_message\">Date is in the incorrect format!!! <br> Please Check your inputted date</p>";
 
                     echo "<table class=\"button_group\">";
@@ -117,7 +124,7 @@
                     die();
                 }
 
-                //Fifth Field (Comprised of different fields)
+                //Fifth Field permission information 
                 if (isset($_POST["like"]) || isset($_POST["comment"]) || isset($_POST["share"])) {
                     $perm1 = mysqli_real_escape_string($conn, $_POST["like"]);
                     $perm2 = mysqli_real_escape_string($conn, $_POST["comment"]);
@@ -134,8 +141,7 @@
                 // executes the query
                 $result = mysqli_query($conn, $query);
 
-                // checks if the execution was successful. Print an error message if the status code already exist in the 
-                // table
+                // checks if the execution was successful. Print an error message if the status code already exist in the table
                 if (!$result) {
                     echo "<p class=\"error_message\">Something is wrong with Status Code!!!"
                         . "<br>"
