@@ -13,11 +13,10 @@
     <h1>Status Posting System</h1>
     <div class="postform">
         <?php
-            // sql info or use include 'file.inc'
+            // Using require_once to check if the setting.php document has been included 
             require_once('../../files/setting.php');
 
-            // The @ operator suppresses the display of any error messages
-            // mysqli_connect returns false if connection failed, otherwise a connection value
+            //Connecting to phpMyAdmin
             $conn = mysqli_connect(
                 $host,
                 $user,
@@ -27,17 +26,18 @@
  
             // Checks if connection is successful
             if (!$conn) {
-                // Displays an error message
+                // Error message to indicate to user that the connection was not successful 
                 echo "<p>Database connection failure</p>";
              } 
 
             else 
             {
-                //Check if the Main database exist using the query 
+                //Check if the Main database exist by selecting all the infromation from the table 
                 $query = "SELECT * FROM statusPost";
                 $result = mysqli_query($conn, $query);
 
-                //Create the Main database 
+                //If the selecting information from the table causes an error, means that the table does not exist 
+                //Create a new query that creates a 'statusPost' table. 
                 if (!$result) 
                 {
                     $query1 = "CREATE TABLE `statusPost` (
@@ -50,7 +50,7 @@
                             );";
                     $result = mysqli_query($conn, $query1);
 
-                    //check if command was successuful 
+                    //check if command was successuful. If not echo an error message 
                     if (!$result) {
                         echo "<p>Something is wrong with ", $query1, "</p>";
                         echo "<p>MySQL Error: ", mysqli_error($conn), "</p>";
@@ -59,6 +59,8 @@
             }
         ?>
 
+        <!-- Form that consist the following fields : status code, status, share info, date and permission info  -->
+        <!-- The form using a post method to get the data from each form field -->
         <form method="post" action="poststatusprocess.php">
             <table class="post_table">
                 <tr>
@@ -92,7 +94,8 @@
                 <tr>
                     <td class="post_info"><label for="date"> Date: </label></td>
                     <td>
-                        <input type="date" name="date" id="date" />
+                        <!-- PHP code used to show the current date inside the field -->
+                        <input type="date" name="date" id="date" value="<?php echo date('Y-m-d') ?>"/>
                     </td>
                 </tr>
 

@@ -10,28 +10,26 @@
         <div class="content">
         <h1>Status information</h1>
             <?php   
-                // sql info or use include 'file.inc'
+                // Using require_once to check if the setting.php document has been included 
                 require_once('../../files/setting.php');
 
-                // The @ operator suppresses the display of any error messages
-                // mysqli_connect returns false if connection failed, otherwise a connection value
+                //Connecting to phpMyAdmin
                 $conn = mysqli_connect(
                     $host,
                     $user,
                     $pswd,
                     $dbnm
                 );
-                
+
                 // Checks if connection is successful
-                if (!$conn) 
-                {
-                    // Displays an error message
+                if (!$conn) {
+                    // Error message to indicate to user that the connection was not successful 
                     echo "<p>Database connection failure</p>";
                 } 
 
                 else 
                 {
-                    //Check if the Main database exist 
+                    //Check if 'statusPost' table exist on the database  
                     $query = "SELECT * FROM statusPost";
                     $result = mysqli_query($conn, $query); 
 
@@ -42,7 +40,7 @@
 
                         echo "<table class=\"button_group\">";
                         echo "<tr>";
-                        echo "<td><p><a href=\"index.html\">Return to Home Page</a></p></td>";
+                        echo "<td><p><a href=\"index.html\" class=\"button\">Return to Home Page</a></p></td>";
                         echo "<td><p><a href=\"poststatusform.php\" class=\"button\">Return to Post Status page</a></p></td>";
                         echo "</tr>";
                         echo "</table>";
@@ -52,13 +50,18 @@
                     else 
                     {
                         $search = mysqli_real_escape_string($conn, $_GET["search"]);
-                        $pattern = "/^$/";
-                        $pattern2 = "/^[a-zA-Z0-9,.?! ]+$/";
+
+                        //Pattern is used to check if the user input is empty 
+                        $pattern = "/^$/"; 
+
+                        //Pattern is used to check if user input only inclues alphanumericals, comma,
+                        //period, exclamation and question mark
+                        $pattern2 = "/^[a-zA-Z0-9,.?! ]+$/"; 
 
                         //check if the field is empty
                         if (preg_match($pattern, $search))
                         {
-                            //error message
+                            //error message is diplayed if the user input to the field is blank
                             echo "<p class=\"error_message\">Search box is blank, Please enter a keyword into search box!!!</p>";
                             echo "<table class=\"button_group\">";
                             echo "<tr>";
@@ -69,10 +72,10 @@
                             die();
                         }
 
-                        //check if the field has correct formatting 
+                        //check if the field has the correct formatting using pattern 2 
                         if (!preg_match($pattern2, $search))
                         {
-                            //error message
+                            //Error message will appear if the user input does not include alphanumericals, comma, period, exclamation and question mark
                             echo "<p class=\"error_message\">The status must contain only alphanumericals, comma, period, exclamation and question mark</p>";
                             echo "<table class=\"button_group\">";
                             echo "<tr>";
@@ -83,24 +86,28 @@
                             die();
                         }
 
-                        //Check if keyword is present in the st columns 
-                        $query = "SELECT * FROM statusPost WHERE st LIKE '$search%'";
+                        //Check if keyword is present in the st columns through the use of the wildcard operator at the beginning 
+                        //and end of $search
+                        $query = "SELECT * FROM statusPost WHERE st LIKE '%$search%'";
                         $result = mysqli_query($conn, $query);
 
+                        //IF statement is used to check if $result has any matching information on the 'statusPost'
                         if(mysqli_num_rows($result) == 0)
                         {
-                            echo "<p>Status not found. Please use a different Keyword!!!</p>";
-                            echo "<p><a href=\"searchstatusform.html\">Return to Search status page</a></p>";
+                            //This error message will appear if the user input keyword cannot be found on the table
+                            echo "<p class=\"error_message\">Status not found. Please use a different Keyword!!!</p>";
+                            echo "<p class=\"post_home\"><a href=\"searchstatusform.html\" class=\"button\">Return to Search status page</a></p>";
                         }
                         
                         else
                         {
                             //Display the information 
-                            //check that record has been retrieved from the table 
+                            //check that record has been retrieved from the table and echo the information that matches 
+                            //the keyword provided by the user
                             while ($row = mysqli_fetch_assoc($result))
                             {
                                 echo "<div class=\"search_info\">"
-                                ."<p>Status code:",$row["stcode"]
+                                ."<p>Status code: ",$row["stcode"]
                                 ."<br>"
                                 ."Status: ",$row["st"]
                                 ."<br>" 
@@ -114,6 +121,8 @@
                                 ."<hr>";
                                 
                             }
+
+                            //clickable buttons that allow the user to return to the home page or search form page 
                             echo "<table class=\"button_group\">";
                             echo "<tr>";
                             echo "<td><p><a href=\"index.html\" class=\"button\">Return to Home Page</a></p></td>";
